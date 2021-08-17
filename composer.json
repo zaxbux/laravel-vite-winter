@@ -16,16 +16,14 @@
 	],
 	"require": {
 		"php": "^7.4|^8.0",
-		"illuminate/contracts": "^8.0",
+		"illuminate/contracts": "6.0 as 7.0",
 		"spatie/laravel-package-tools": "^1.1",
 		"guzzlehttp/guzzle": "^7.2"
 	},
 	"require-dev": {
 		"friendsofphp/php-cs-fixer": "^2.18",
-		"orchestra/testbench": "^6.0",
 		"pestphp/pest": "^1.0",
 		"phpunit/phpunit": "^9.3",
-		"spatie/laravel-ray": "^1.9"
 	},
 	"autoload": {
 		"files": [
@@ -33,17 +31,12 @@
 		],
 		"psr-4": {
 			"Innocenzi\\Vite\\": "src",
-			"Innocenzi\\Vite\\Database\\Factories\\": "database/factories"
 		}
 	},
 	"autoload-dev": {
 		"psr-4": {
 			"Innocenzi\\Vite\\Tests\\": "tests"
 		}
-	},
-	"scripts": {
-		"test": "vendor/bin/pest",
-		"test:windows": ".\\vendor\\bin\\pest"
 	},
 	"config": {
 		"sort-packages": true
