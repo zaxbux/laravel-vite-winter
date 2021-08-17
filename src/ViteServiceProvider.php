@@ -15,28 +15,11 @@ class ViteServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-vite')
             ->hasConfigFile()
-            ->hasCommand(ExportConfigurationCommand::class)
-            ->hasCommand(GenerateAliasesCommand::class);
+            ->hasCommand(ExportConfigurationCommand::class);
     }
 
     public function registeringPackage()
     {
         $this->app->singleton(Vite::class, fn () => new Vite());
-
-        Blade::directive('vite', function ($entryName = null) {
-            if (! $entryName) {
-                return '<?php echo vite_tags() ?>';
-            }
-
-            return sprintf('<?php echo vite_entry(e(%s)); ?>', $entryName);
-        });
-
-        Blade::directive('client', function () {
-            return '<?php echo vite_client(); ?>';
-        });
-
-        Blade::directive('react', function () {
-            return '<?php echo vite_react_refresh_runtime(); ?>';
-        });
     }
 }
