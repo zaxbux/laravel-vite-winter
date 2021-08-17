@@ -2,11 +2,12 @@
 
 namespace Innocenzi\Vite;
 
+use Http;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Http;
+
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
 
@@ -159,10 +160,10 @@ class Vite
     public function isDevelopmentServerRunning(): bool
     {
         try {
-            return $this->isDevelopmentServerRunning ??= Http::withOptions([
-                'connect_timeout' => config('vite.ping_timeout'),
-                'verify' => false,
-            ])->get(config('vite.dev_url') . '/@vite/client')->successful();
+            return $this->isDevelopmentServerRunning ??= Http::get(config('vite.dev_url') . '/@vite/client', function ($http) {
+                $http->setOption(CURLOPT_SSL_VERIFYHOST, false);
+                $http->timeout(config('vite.ping_timeout'));
+            })->ok;
         } catch (\Throwable $th) {
         }
 
