@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Innocenzi\Vite\Exceptions\ManifestNotFound;
 use Innocenzi\Vite\Exceptions\NoSuchEntrypointException;
 use Stringable;
+use Cms\Classes\Theme;
 
 class Manifest implements Htmlable, Stringable
 {
@@ -62,7 +63,7 @@ class Manifest implements Htmlable, Stringable
      */
     protected function getManifestPath(string $path = null): string
     {
-        $path ??= public_path(config('vite.build_path') . '/' . self::MANIFEST_FILE_NAME);
+        $path ??= themes_path(Theme::getActiveTheme()->getDirName() . '/' . config('vite.build_path') . '/' . self::MANIFEST_FILE_NAME);
 
         if (! file_exists($path)) {
             throw new ManifestNotFound($path);
