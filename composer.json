@@ -30,7 +30,7 @@
 			"src/helpers.php"
 		],
 		"psr-4": {
-			"Innocenzi\\Vite\\": "src",
+			"Innocenzi\\Vite\\": "src"
 		}
 	},
 	"autoload-dev": {
